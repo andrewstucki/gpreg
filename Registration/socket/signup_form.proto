@@ -1,0 +1,54 @@
+message SignupRequest
+{
+	required string name = 1;
+
+	message FormEntry {
+		required string name = 1;
+		repeated string value = 2;
+	}
+	
+	repeated FormEntry entry = 2;
+};
+
+message SignupResponse
+{
+	required string response = 1;
+};
+
+message ListRequest
+{
+    required string username = 1;
+}
+
+message ListResponse
+{
+	repeated uint32 id = 1;
+}
+
+message FormRequest
+{
+	required uint32 id = 1;
+}
+
+message FormResponse
+{
+	required string name = 1;
+	required uint32 id = 2;
+
+	enum FormElementType {
+		CHECK = 0;
+		RADIO = 1;
+		SELECT = 2;
+		TEXT = 3;
+	}
+	
+	message FormElement {
+		repeated string options = 1;
+		required FormElementType type = 2;
+		required string name = 3;
+	}
+	
+	repeated FormElement element = 3;
+};
+
+option optimize_for = LITE_RUNTIME;
